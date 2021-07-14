@@ -1,0 +1,98 @@
+//滾動條不要背景
+this.roadPanel.vScrollBarSkin = "";
+
+
+
+this.roadPanel.vScrollBar.max = roadAry.length*120-480;
+
+this.betCheckPanel.vScrollBar.value=0;
+
+
+if(betNum>4)
+{
+	this.betCheckPanel.vScrollBar.max = betNum*75-300;
+	this.betCheckPanel.vScrollBar.value=0;
+	this.betCheckPanel.vScrollBar.visible = true;
+}
+else
+{	
+	this.betCheckPanel.vScrollBar.max = 0;
+	this.betCheckPanel.vScrollBar.value=0;
+	this.betCheckPanel.vScrollBar.visible = false;
+}
+-----------------------------------------------------------
+
+
+private function creatVideo():void
+{
+	var videoEl = Browser.document.createElement('video'); 
+	videoEl.id = 'vid';
+	videoEl.setAttribute('controls', '');  
+	videoEl.setAttribute('data-setup', '');
+	videoEl.setAttribute('autoplay', 'false');
+	videoEl.setAttribute('playsinline', ''); //IOS 不全螢幕
+	videoEl.setAttribute('pointer-events', 'auto');  //屏幕切换播放/暂停
+	videoEl.className = 'video-js vjs-default-skin vjs-big-play-centered'; //css
+	Browser.document.body.appendChild(videoEl);
+	
+	__JS__("var player = videojs('vid')");
+	__JS__("player.src({src:'http://pull1.vv8c.top/live/LiveA/playlist.m3u8',type:'application/x-mpegURL'})");
+	
+
+	var ttt = Browser.document.getElementById('vid');
+	Utils.fitDOMElementInArea(ttt, mainPage.carArea, 0, 0, mainPage.carArea.width, mainPage.carArea.height);
+	
+	__JS__("player.pause()");
+	__JS__("player.hide()");
+	__JS__("player.muted(true)");
+
+}
+-----------------------------------------------------------
+
+document.getElementById('layaCanvas').style.position='fixed';
+
+----------------------------------------------------------
+
+
+Laya.init(640,950);
+
+			Laya.stage.scaleMode=Stage.SCALE_SHOWALL; 
+			Laya.stage.alignH = Stage.ALIGN_CENTER;
+			
+			Laya.stage.screenMode = "horizontal";
+			Laya.stage.screenMode = "vertical";
+			
+
+			var resArray:Array = [
+			{url:"res/atlas/startpageui.json",type:Loader.ATLAS},
+			{url:"res/atlas/hsui.json",type:Loader.ATLAS}
+			];
+
+			Laya.loader.load(resArray, Handler.create(this, this.sideL));
+			
+			
+----------------------------------------------------------
+window.document.body.scrollTop=100;
+window.document.documentElement.scrollTop=100;
+
+----------------------------------------------------------
+
+var belem = document.getElementsByTagName("body")[0];
+		belem.style.height = document.body.clientHeight+50;
+			
+			
+			
+------------------------------------------------------------
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			

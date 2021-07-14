@@ -1,0 +1,109 @@
+﻿var videoE2 = Browser.document.createElement('video'); 
+			videoE2.id = 'vid2';
+			videoE2.setAttribute('controls', '');  
+			videoE2.setAttribute('data-setup', '');
+			videoE2.setAttribute('pointer-events', 'auto');  //屏幕切换播放/暂停
+			videoE2.className = 'video-js vjs-default-skin vjs-big-play-centered'; //css
+			Browser.document.body.appendChild(videoE2);
+			
+			__JS__("var player2 = videojs('vid2')");
+			__JS__("player2.src({src:'http://pull1.hydblm.com/live/HP_BACC_a2/playlist.m3u8',type:'application/x-mpegURL'})");
+			__JS__("player2.hide()");
+			
+			
+			
+			
+if(Browser.onIOS)
+					{
+						__JS__("oV.requestFullscreen(); ");
+					}else
+					{
+						__JS__("var oV = videojs('vid')");
+						__JS__("oV.hide()");
+
+						__JS__("var oV2 = videojs('vid2')");
+						__JS__("oV2.show()");
+						__JS__("oV2.play()");
+					}
+					
+					
+					
+if(Browser.onIOS)
+					{
+						__JS__("oV.exitFullscreen(); ");
+					}else
+					{
+						__JS__("var oV2 = videojs('vid2')");
+						__JS__("oV2.hide()");
+
+						__JS__("var oV = videojs('vid')");
+						__JS__("oV.show()");
+						__JS__("oV.play()");
+					}
+
+
+
+
+function fullScreen(){
+	console.log("ttttttttttttteeeeeeesssssssssstttttttttt!!!!");
+	var element = document.getElementById("vid");
+	if(element.requestFullscreen) 
+	{
+		element.requestFullscreen();
+	} 
+	else if (element.webkitRequestFullscreen) 
+	{
+		element.webkitRequestFullscreen();
+	} 
+	else if (element.mozRequestFullScreen) 
+	{
+		element.mozRequestFullScreen();
+	} 
+	else if (element.msRequestFullscreen) 
+	{
+		element.msRequestFullscreen();
+	}else{}	
+
+}
+
+function fullScreenN(){
+	console.log("fullScreenNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN!!!!");
+	var element = document.getElementById("vid");
+	if ("exitFullscreen" in document) 
+	{
+		document.exitFullscreen();
+	} 
+	else if ("webkitExitFullscreen" in document) 
+	{
+		document.webkitExitFullscreen();
+	} 
+	else if ("mozCancelFullScreen" in document) 
+	{
+		document.mozCancelFullScreen();
+	} 
+	else if ("msExitFullscreen" in document) 
+	{
+		document.msExitFullscreen();
+	}else{}
+
+}
+
+__JS__("var oV = videojs('vid')");
+			__JS__(" var isPaused = oV.paused()");
+
+			if(__JS__("isPaused"))
+			{
+				if(Browser.clientWidth>Browser.clientHeight)
+				{
+					__JS__("oV.pause()");
+					__JS__("oV.hide()");
+					this.ht.visible = true;
+				}else{
+					__JS__("oV.show()");
+					__JS__("oV.play()");
+					this.ht.visible = false;
+				}
+			}
+
+__JS__("oV.requestFullscreen(); ");
+__JS__("oV.exitFullscreen(); ");

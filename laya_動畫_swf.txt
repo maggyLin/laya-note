@@ -1,0 +1,68 @@
+﻿直接用swf
+
+package 
+{
+
+	import laya.ani.swf.MovieClip;
+	import code.GlobalData;
+
+	public class GiftSwf{
+
+		private	var mc:MovieClip ;
+		private var giftNum:String=""; //禮物編號
+
+		public function GiftSwf(){}
+
+		public function giftcheck(num:int):void
+		{	
+			giftNum = num as String;
+
+			switch(giftNum)
+			{
+				case "14": //鑽戒
+					giftFun(-180,2100);
+				break;
+				case "19": //小熊
+					giftFun(-230,3000);
+				break;
+				case "23": //讚
+					giftFun(-100,1000);
+				break;
+				case "25": //愛你
+					giftFun(-65,2000);
+				break;
+				case "26": //滷肉飯
+					giftFun(-100,2500);
+				break;
+				default:
+			}		
+		}
+
+
+		//xc:x座標位置 , time:動畫秒數
+		private function giftFun(xc:int,time:int):void{
+			mc = new MovieClip();
+
+			//加载swf资源,load方法的第二个参数不设置为散图模式加载，设置为true是采用图集方式加载。
+			mc.load("res/swf/"+giftNum+".swf",true);
+			mc.x=xc;
+			mc.scale(0.8,0.8);
+			
+			//添加到舞台
+			LayaSample.honey.swfBox.visible = true;
+			LayaSample.honey.swfBox.addChild(mc);
+			
+			Laya.timer.once(time,this,stopani);
+		}
+
+
+		private function stopani():void{
+			mc.destroy();
+			LayaSample.honey.swfBox.visible = false;
+		}
+
+
+
+	}
+
+}

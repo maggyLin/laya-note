@@ -1,0 +1,73 @@
+layabox進度條
+
+https://ask.layabox.com/question/310
+
+
+由于JS下没有进度事件，所以我们无法获取单个文件的精准加载进度值。
+但是我们可以根据所加载文件的总个数去模拟加载进度，示例如下：
+package
+{
+	import laya.net.Loader;
+	import laya.ui.ProgressBar;
+	import laya.utils.Handler;
+	
+	public class LoadingDemo
+	{
+		private var progressBar:ProgressBar;
+		public function LoadingDemo()
+		{
+			Laya.init(550,400);
+			//预加载loading条资源
+			var pro1:Object={url:"loads/progressBar.png",type:Loader.IMAGE};
+			var pro2:Object={url:"loads/progressBar$bar.png",type:Loader.IMAGE};
+			var proArr:Array=;
+			proArr.push(pro1,pro2);
+			Laya.loader.load(proArr,Handler.create(this,onProLoaded));
+		}
+		
+		private function onProLoaded():void
+		{
+			// 将进度条显示到舞台
+			showProgress();
+			
+			//开始预加载游戏资源
+			var ape1:Object={url:"apes/monkey0.png",type:Loader.IMAGE};
+			var ape2:Object={url:"apes/monkey1.png",type:Loader.IMAGE};
+			var ape3:Object={url:"apes/monkey2.png",type:Loader.IMAGE};
+			var ape4:Object={url:"apes/monkey3.png",type:Loader.IMAGE};
+			var ape5:Object={url:"apes/image1.png",type:Loader.IMAGE};
+			var ape6:Object={url:"apes/image2.png",type:Loader.IMAGE};
+			var ape7:Object={url:"apes/image3.png",type:Loader.IMAGE};
+			
+			var arr:Array=;
+			arr.push(ape1,ape2,ape3,ape4,ape5,ape6,ape7);
+			//设置progress Handler的第4个参数为true，根据加载文件个数获取加载进度
+			Laya.loader.load(arr,null,Handler.create(this,onProgress,null,false));
+		}
+		// 将进度条显示到舞台
+		private function showProgress():void
+		{
+			progressBar=new ProgressBar("loads/progressBar.png");
+			progressBar.pos(50,300);
+			progressBar.width=300;
+			progressBar.sizeGrid="5,5,5,5";
+			//当progressBar的value值改变时触发
+			progressBar.changeHandler=new Handler(this,onChange);
+			Laya.stage.addChild(progressBar);
+		}
+		private function onChange(value:Number):void
+		{
+			trace("进度: "+Math.floor(value*100)+"%");
+		}
+		//游戏资源加载进度函数
+		private function onProgress(pro:Number):void
+		{
+			trace("加载了总文件的:"+pro+"%")
+			progressBar.value=pro;
+			if(progressBar.value==1)
+			{
+				progressBar.value=1;
+			}
+		}
+	}
+}

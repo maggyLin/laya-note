@@ -1,0 +1,47 @@
+	var scnfull = function(){
+
+
+		var fullImg = document.getElementById("fimg");
+		var layaC = document.getElementById("layaCanvas");
+		var c = document.getElementById("leftCor");
+
+
+
+		if(/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
+			fullImg.style.display = "none";
+		}else
+		{
+			//screen scale
+			var ss = document.body.clientWidth/document.body.clientHeight;
+			var yy = document.body.clientHeight/640; //height©ñ¤j¤ñ¨Ò
+			var xx = document.body.clientWidth/1136;
+
+			//image size
+			if(ss>1.775)
+			{
+				var ww = yy*45;
+				var layaw = yy*1136;
+				var layah = yy*640;
+			}else
+			{
+				var ww = xx*45;
+				var layaw = xx*1136;
+				var layah = xx*640;
+			}
+
+			fullImg.style.width = ww+"px";
+			fullImg.style.height = ww+"px";
+
+
+			//image position
+			var leftS = (document.body.clientWidth-layaw)/2+(layaw*0.85);
+			fullImg.style.left =leftS+"px";
+
+			var topS = (document.body.clientHeight-layah)/2+5;
+			fullImg.style.top =topS+"px";	
+		}
+
+
+
+
+	}

@@ -1,0 +1,36 @@
+private function onBtn2Click(e:Event):void {
+			//通过赋值可以简单快速修改组件属性
+			//赋值有两种方式：
+			//简单赋值，比如：progress:0.2，就是更改progress组件的value为2
+			//复杂复制，可以通知某个属性，比如：label:{color:"#ff0000",text:"Hello LayaAir"}
+			box.dataSource = {slider: 50, scroll: 80, progress: 0.2, input: "This is a input", label: {color: "#ff0000", text: "Hello LayaAir"}};
+			
+			//list赋值，先获得一个数据源数组
+			var arr:Array = [];
+			for (var i:int = 0; i < 10; i++) {
+				arr.push({label: "item " + i, clip: i % 9});
+			}
+			
+			//给list赋值更改list的显示
+			list.array = arr;
+		
+			//还可以自定义list渲染方式，可以打开下面注释看一下效果
+			list.renderHandler = new Handler(this, onListRender);
+
+			//Laya.timer.once(3000,this,aaa);
+		}
+		
+		private function onListRender(item:Box, index:int):void {
+			//自定义list的渲染方式
+			var label:Label = item.getChildByName("label") as Label;
+			if (index % 2) {
+				label.color = "#ff0000";
+			} else {
+				label.color = "#000000";
+			}
+		}
+
+		private function aaa():void {
+			var arr:Array = [];
+			list.array = arr;
+		}

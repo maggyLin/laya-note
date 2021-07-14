@@ -1,0 +1,17 @@
+1.圖片暫存
+Laya.loader.load(resArray, Handler.create(this, this.loadImgShowEnd));
+只會在json加版號,
+要手動在編譯(發布)後,改寫max.js,
+	var __proto=HTMLImage.prototype;
+	__proto._init_=function(src,def){
+		this._src=src;
+		this._source=new Browser.window.Image();
+		if (def){
+			def.onload && (this.onload=def.onload);
+			def.onerror && (this.onerror=def.onerror);
+			def.onCreate && def.onCreate(this);
+		}
+		if (src.indexOf("data:image")!=0)this._source.crossOrigin="";
+		(src)&& (this._source.src=src+"?v=0000");
+	}
+

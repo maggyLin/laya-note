@@ -1,0 +1,59 @@
+﻿package 
+{
+
+	import laya.display.Animation;
+	import laya.utils.Timer;
+	import laya.events.Event;
+
+	public class AniShow{
+		public var gift_3:Animation = new Animation(); //情書
+		
+		
+		public function AniShow(){
+			creatTheAni(gift_3,"res/atlas/giftAni/gift_3.json",0,500,1);
+		}
+
+		//n=name,r=road,x=x軸,y=y軸,s=scale,t=延遲s
+		private function creatTheAni(n:Animation,r:String,x:Number,y:Number,s:Number):void
+		{
+			n.loadAtlas(r);
+			n.scale(s,s);
+			Laya.stage.addChild(n);
+			n.x=x;
+			n.y=y;
+			
+			n.visible=false;
+			n.stop();
+		}
+
+		//n=number find name 
+		public function showAni(n:int):void
+		{	
+			var tmpAni:Animation;
+
+			switch(n)
+			{	
+				case "3": //情書
+					tmpAni = gift_3;
+				break;
+				case "14": //鑽戒
+					tmpAni = gift_14;
+				break;
+	
+				default:
+			}
+
+			tmpAni.visible = true;
+			tmpAni.play(0,false);
+			tmpAni.on(Event.COMPLETE,this,stopAni,[tmpAni]);
+		}
+
+		public function stopAni(n:Animation):void
+		{	
+			n.off(Event.COMPLETE,this,stopAni);
+			n.visible = false;
+		}
+	
+	}
+
+}
